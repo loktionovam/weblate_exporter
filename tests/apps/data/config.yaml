@@ -1,0 +1,5 @@
+---
+
+weblate_api_url: http://test-weblate:8080/api/
+weblate_api_key: test_weblate_api_key
+weblate_exporter_port: 9867
