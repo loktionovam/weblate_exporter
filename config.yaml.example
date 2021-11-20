@@ -1,0 +1,4 @@
+---
+weblate_api_url: # Put weblate api url here, i.e http://weblate.example.com/api/
+weblate_api_key: # Put weblate api key here which will be used to fetch metrics from weblate
+weblate_exporter_port: 9867
