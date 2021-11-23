@@ -5,7 +5,7 @@ lint:
 	python -m black --check weblate_exporter tests
 
 test-apps: lint
-	python -m pytest --cov-report=html --cov-report=term --cov=weblate_exporter tests/apps -v
+	python -m pytest --cov-report=xml --cov-report=term --cov=weblate_exporter tests/apps -v
 
 fmt:
 	python -m black weblate_exporter tests
