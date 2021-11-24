@@ -51,7 +51,7 @@ class WeblateMetrics:
                     labels=["name"],
                 )
                 value = self._flattened_raw_metrics[metric]
-            self.data[metric_name].add_metric(labels, value)
+                self.data[metric_name].add_metric(labels, value)
 
 
 class WeblateCollector:
