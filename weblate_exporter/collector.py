@@ -6,6 +6,28 @@ from requests.exceptions import ConnectionError
 
 
 class WeblateMetrics:
+    """
+    The data class which parses raw metrics from Weblate described here:
+
+    https://docs.weblate.org/en/latest/admin/install.html?highlight=metrics#monitoring-weblate
+
+    and represents them in a prometheus format.
+
+    Example of metrics:
+
+        weblate_exporter_app_units
+        weblate_exporter_app_units_translated
+        ....
+        ....
+
+    Celery queues are flattened with ':' delimiter, i.e.
+
+        weblate_exporter_app_celery_queues:notify
+        weblate_exporter_app_celery_queues:translate
+        ....
+        ....
+    """
+
     def __init__(self, raw_metrics: dict = {}):
         self.metrics_prefix = "weblate_exporter_app"
         self._flattened_raw_metrics = flatdict.FlatDict(raw_metrics, delimiter=":")
@@ -33,11 +55,26 @@ class WeblateMetrics:
 
 
 class WeblateCollector:
+    """
+    The custom prometheus collector which fetches metrics data from Weblate instance and
+    store them in prometheus format. Instance of the class is used by a prometheus client registry.
+
+    https://github.com/prometheus/client_python#custom-collectors
+    """
+
     def __init__(
         self,
         api_url: str,
         api_key: str = None,
     ):
+        """
+        :param api_url: Weblate API root endpoint, i.e. http://weblate:8080/api/
+                        Notice, that you should use '/' as a trailing slash.
+
+                    More information about Weblate API here: https://docs.weblate.org/en/latest/api.html
+        :param api_key: authorization token which described here https://docs.weblate.org/en/latest/api.html?highlight=token#authentication-and-generic-parameters
+        """
+
         self.api_key = api_key
         self.api_url = api_url
         self._raw_metrics = {}

@@ -14,6 +14,7 @@ setup(
   name="weblate_exporter",
   packages=find_packages(),
   version=os.environ.get("VERSION", "dev"),
+  license="GPLv3+",
   description="Weblate metrics exporter",
   long_description=open('README.md', 'r').read(),
   author="Aleksandr Loktionov",
