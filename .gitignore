@@ -5,3 +5,4 @@ htmlcov/
 .coverage
 .pytest_cache/
 coverage.xml
+*.tgz

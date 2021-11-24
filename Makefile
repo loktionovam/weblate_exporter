@@ -16,6 +16,9 @@ build-images:
 test-images:
 	python -m pytest tests/images -v
 
+build-helm:
+	helm/release_helm_chart.py
+
 all: test-apps build-images test-images
 
 .PHONY: test-apps fmt lint build-images test-images all
