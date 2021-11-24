@@ -42,9 +42,21 @@ jobs:
       - name: Inject slug/short variables
         uses: rlespinasse/github-slug-action@v3.x
       - name: Build and test weblate exporter image
+        env:
+          WEBLATE_EXPORTER_IMAGE_TAG: '${{ env.GITHUB_REF_SLUG }}'
         run: |
-          export WEBLATE_EXPORTER_IMAGE_TAG=${{ env.GITHUB_REF_SLUG }}
           make build-images
           python -m pip install --upgrade pip
           if [ -f requirements-test.txt ]; then pip install -r requirements-test.txt; fi
           make test-images
+      - name: Log into registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Push image
+        if: github.event_name != 'pull_request'
+        env:
+          WEBLATE_EXPORTER_IMAGE_TAG: '${{ env.GITHUB_REF_SLUG }}'
+        run: docker push ${{ env.WEBLATE_EXPORTER_IMAGE_NAME }}:${{ env.WEBLATE_EXPORTER_IMAGE_TAG }}
