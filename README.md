@@ -10,11 +10,36 @@ Supported versions:
 
 * Weblate >= 4.9
 
+Basic metrics
+| Metric                                      | Type  | Description                                                                                                      | Labels |
+|---------------------------------------------|-------|------------------------------------------------------------------------------------------------------------------|--------|
+| `weblate_exporter_app_up`                   | Gauge | Weblate application is running up                                                                                | `name` |
+| `weblate_exporter_app_units`                | Gauge | Total number of [units](https://docs.weblate.org/en/latest/api.html?highlight=units#units)                       | `name` |
+| `weblate_exporter_app_units_translated`     | Gauge | Number of translated [units](https://docs.weblate.org/en/latest/api.html?highlight=units#units)                  | `name` |
+| `weblate_exporter_app_users`                | Gauge | Number of weblate users                                                                                          | `name` |
+| `weblate_exporter_app_changes`              | Gauge | Number of [translation changes](https://docs.weblate.org/en/latest/api.html?highlight=changes#get--api-changes-) | `name` |
+| `weblate_exporter_app_projects`             | Gauge | Number of [projects](https://docs.weblate.org/en/latest/user/translating.html#translation-projects)              | `name` |
+| `weblate_exporter_app_components`           | Gauge | Number of [components](https://docs.weblate.org/en/latest/admin/projects.html#component)                         | `name` |
+| `weblate_exporter_app_translations`         | Gauge | Number of [translations](https://docs.weblate.org/en/latest/api.html?highlight=units#translations)               | `name` |
+| `weblate_exporter_app_languages`            | Gauge | Number of [used languages](https://docs.weblate.org/en/latest/api.html?highlight=units#languages)                | `name` |
+| `weblate_exporter_app_configuration_errors` | Gauge | Number of [configuration errors](https://docs.weblate.org/en/latest/api.html?highlight=units#metrics)            | `name` |
+| `weblate_exporter_app_suggestions`          | Gauge | Number of pending [suggestions](https://docs.weblate.org/en/latest/api.html?highlight=units#metrics)             | `name` |
+
+Metrics below describes lengths of various celery queues, see [Background tasks using Celery](https://docs.weblate.org/en/latest/admin/install.html#celery)
+| Metric                                         | Type  | Labels |
+|------------------------------------------------|-------|--------|
+| `weblate_exporter_app_celery_queues:memory`    | Gauge | `name` |
+| `weblate_exporter_app_celery_queues:notify`    | Gauge | `name` |
+| `weblate_exporter_app_celery_queues:celery"`   | Gauge | `name` |
+| `weblate_exporter_app_celery_queues:translate` | Gauge | `name` |
+| `weblate_exporter_app_celery_queues:backup`    | Gauge | `name` |
+
 ## Building and running
 
 ### Prerequisites
 
 * docker engine >= 20.10
+* helm >= 3.7.1
 * make
 * python >= 3.10 (used by tests only)
 * python3-venv (used by tests only)
@@ -53,6 +78,38 @@ Supported versions:
     ```
 
 ### Run the weblate_exporter
+
+#### Helm
+
+* Add weblate-exporter helm repository:
+
+  ```shell
+    helm repo add weblate-exporter https://raw.githubusercontent.com/loktionovam/weblate_exporter/gh-pages/
+    helm repo update
+  ```
+
+* Search available weblate-exporter helm charts:
+
+  ```shell
+    helm search repo --versions weblate-exporter
+
+    NAME                             	CHART VERSION	APP VERSION	DESCRIPTION
+    weblate-exporter/weblate-exporter	0.3.2        	v0.3.2     	Weblate prometheus metrics exporter
+
+  ```
+
+* Deploy new helm release:
+
+  ```shell
+  helm install weblate-exporter weblate-exporter/weblate-exporter \
+    --version 0.3.2 \
+    --set config.weblateAPIUrl="http://weblate.example.com:8080/api/" \
+    --set config.weblateAPIKey="secret_api_key"
+
+    helm test weblate-exporter
+  ```
+
+#### Docker
 
 * Running using environment variables:
 
