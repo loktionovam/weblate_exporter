@@ -8,8 +8,8 @@ metadata:
     "helm.sh/hook": test
 spec:
   containers:
-    - name: wget
-      image: busybox
-      command: ['wget']
-      args: ['{{ include "weblate-exporter.fullname" . }}:{{ .Values.service.port }}']
+    - name: curl
+      image: alpine
+      command: ["/bin/sh"]
+      args: ["-cx", 'sleep  5 && apk --update add curl && (curl http://{{ include "weblate-exporter.fullname" . }}-svc:{{ .Values.service.port }}/metrics | grep weblate_exporter_app_up) && exit 0']
   restartPolicy: Never
