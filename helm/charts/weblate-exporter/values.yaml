@@ -2,29 +2,34 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+
 replicaCount: 1
 
 image:
   repository: loktionovam/weblate_exporter
   pullPolicy: IfNotPresent
-  tag: "v0.2.0"
+  tag: "v0.3.2"
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
 config:
+  # config.weblateAPIUrl -- weblate API URL, i.e http://weblate.example.com/api/ Note: The trailing slash in URL is mandatory
   weblateAPIUrl: ""
+
+  # config.weblateAPIKey -- weblate API key, which you can get in your profile
   weblateAPIKey: ""
+
+  # config.weblateExporterPort -- weblate exporter bind port
   weblateExporterPort: 9867
 
 serviceAccount:
-  # Specifies whether a service account should be created
+  # serviceAccount.create -- Specifies whether a service account should be created
   create: true
-  # Annotations to add to the service account
+  # serviceAccount.annotations -- Annotations to add to the service account
   annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
+  # serviceAccount.name -- The name of the service account to use. If not set and create is true, a name is generated using the fullname template
   name: ""
 
 podAnnotations: {}
@@ -48,10 +53,10 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: weblate-exporter.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
+  - host: weblate-exporter.local
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
   tls: []
   #  - secretName: weblate-exporter-tls
   #    hosts:

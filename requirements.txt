@@ -5,3 +5,4 @@ wlc~=1.12
 flatdict~=4.0.1
 python-json-logger~=2.0.2
 ruamel.yaml~=0.17.17
+pre-commit~=2.15.0
