@@ -40,6 +40,7 @@ Metrics below describes lengths of various celery queues, see [Background tasks 
 
 * docker engine >= 20.10
 * helm >= 3.7.1
+* helm-docs >= 1.5.0
 * make
 * python >= 3.10 (used by tests only)
 * python3-venv (used by tests only)

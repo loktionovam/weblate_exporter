@@ -1,0 +1,34 @@
+{{ template "chart.header" . }}
+{{ template "chart.deprecationWarning" . }}
+
+{{ template "chart.badgesSection" . }}
+
+{{ template "chart.description" . }}
+
+{{ template "chart.homepageLine" . }}
+
+{{ template "chart.sourcesSection" . }}
+
+## TL;DR;
+
+```console
+$ helm repo add weblate-exporter https://raw.githubusercontent.com/loktionovam/weblate_exporter/gh-pages/
+$ helm repo update
+
+
+$ helm search repo --versions weblate-exporter
+
+ NAME                             	CHART VERSION	APP VERSION	DESCRIPTION
+ weblate-exporter/weblate-exporter	0.3.2        	v0.3.2     	Weblate prometheus metrics exporter
+
+$  helm install weblate-exporter weblate-exporter/weblate-exporter \
+    --version 0.3.2 \
+    --set config.weblateAPIUrl="http://weblate.example.com:8080/api/" \
+    --set config.weblateAPIKey="secret_api_key"
+
+$ helm test weblate-exporter
+```
+
+{{ template "chart.requirementsSection" . }}
+
+{{ template "chart.valuesSection" . }}
