@@ -8,7 +8,7 @@ replicaCount: 1
 image:
   repository: loktionovam/weblate_exporter
   pullPolicy: IfNotPresent
-  tag: "v0.3.2"
+  tag: "v1.0.0"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -23,6 +23,11 @@ config:
 
   # config.weblateExporterPort -- weblate exporter bind port
   weblateExporterPort: 9867
+
+serviceMonitor:
+  enabled: true
+  interval: 1m
+  port: http
 
 serviceAccount:
   # serviceAccount.create -- Specifies whether a service account should be created

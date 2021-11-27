@@ -1,6 +1,6 @@
 # weblate-exporter
 
-![Version: 0.3.2](https://img.shields.io/badge/Version-0.3.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.3.2](https://img.shields.io/badge/AppVersion-v0.3.2-informational?style=flat-square)
+![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v1.0.0](https://img.shields.io/badge/AppVersion-v1.0.0-informational?style=flat-square)
 
 Weblate prometheus metrics exporter
 
@@ -34,7 +34,7 @@ $ helm test weblate-exporter
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"loktionovam/weblate_exporter"` |  |
-| image.tag | string | `"v0.3.2"` |  |
+| image.tag | string | `"v1.0.0"` |  |
 | imagePullSecrets | list | `[]` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `""` |  |
@@ -60,4 +60,7 @@ $ helm test weblate-exporter
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| serviceMonitor.enabled | bool | `true` |  |
+| serviceMonitor.interval | string | `"1m"` |  |
+| serviceMonitor.port | string | `"http"` |  |
 | tolerations | list | `[]` |  |

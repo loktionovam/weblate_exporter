@@ -1,7 +1,6 @@
 from wlc import Weblate, WeblateException
 from prometheus_client.core import GaugeMetricFamily
 from weblate_exporter.logger import log
-import flatdict
 from requests.exceptions import ConnectionError
 
 
@@ -20,17 +19,20 @@ class WeblateMetrics:
         ....
         ....
 
-    Celery queues are flattened with ':' delimiter, i.e.
+    Celery queues stored as weblate_exporter_app_celery_queues metric
+    with an additional label weblate_celery_queue_name.
 
-        weblate_exporter_app_celery_queues:notify
-        weblate_exporter_app_celery_queues:translate
-        ....
-        ....
     """
 
-    def __init__(self, raw_metrics: dict = {}):
+    def __init__(self, raw_metrics: dict = {}, additional_labels: dict = {}):
         self.metrics_prefix = "weblate_exporter_app"
-        self._flattened_raw_metrics = flatdict.FlatDict(raw_metrics, delimiter=":")
+        labels_names = ["name"]
+        labels_values = [raw_metrics["name"]]
+
+        for k, v in additional_labels.items():
+            labels_names.append(k)
+            labels_values.append(v)
+
         self.data = {
             f"{self.metrics_prefix}_up": GaugeMetricFamily(
                 f"{self.metrics_prefix}_up",
@@ -39,19 +41,27 @@ class WeblateMetrics:
             ),
         }
 
-        labels = [self._flattened_raw_metrics["name"]]
-
-        for metric in self._flattened_raw_metrics.keys():
-
+        for metric, value in raw_metrics.items():
             if metric != "name":
                 metric_name = f"{self.metrics_prefix}_{metric}"
-                self.data[metric_name] = GaugeMetricFamily(
-                    metric_name,
-                    "",
-                    labels=["name"],
-                )
-                value = self._flattened_raw_metrics[metric]
-                self.data[metric_name].add_metric(labels, value)
+                if metric == "celery_queues":
+                    self.data[metric_name] = GaugeMetricFamily(
+                        metric_name,
+                        "",
+                        labels=labels_names + ["weblate_celery_queue_name"],
+                    )
+
+                    for queue_label, queue_value in raw_metrics[metric].items():
+                        self.data[metric_name].add_metric(
+                            labels_values + [queue_label], queue_value
+                        )
+                else:
+                    self.data[metric_name] = GaugeMetricFamily(
+                        metric_name,
+                        "",
+                        labels=labels_names,
+                    )
+                    self.data[metric_name].add_metric(labels_values, value)
 
 
 class WeblateCollector:
@@ -94,6 +104,8 @@ class WeblateCollector:
 
     def collect(self):
         self._fetch_raw_metrics()
-        self.metrics = WeblateMetrics(self._raw_metrics)
+        self.metrics = WeblateMetrics(
+            self._raw_metrics, additional_labels={"weblate_api_url": self.api_url}
+        )
         for metric in self.metrics.data.values():
             yield metric

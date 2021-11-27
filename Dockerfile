@@ -20,7 +20,7 @@ LABEL version=${VERSION}
 ENV DEBUG=0 \
     WEBLATE_API_URL=http://weblate:8080/api/ \
     WEBLATE_API_KEY= \
-    WEBLATE_EXPORTER_PORT=9867
+    WEBLATE_EXPORTER_BIND_PORT=9867
 
 ENTRYPOINT [ "python", "-m", "weblate_exporter" ]
 

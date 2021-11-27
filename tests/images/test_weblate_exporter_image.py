@@ -15,7 +15,8 @@ class TestRequirements(TestCase):
     def setUp(self):
         super(TestRequirements, self).setUp()
 
-    def test_weblate_exporter_port(self):
+    def test_weblate_exporter_bind_port(self):
+        sleep(1)
         self.assertTrue(self.host.socket("tcp://0.0.0.0:9867").is_listening)
 
     def test_weblate_exporter_process(self):
