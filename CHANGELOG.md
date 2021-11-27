@@ -1,9 +1,15 @@
 # Changelog
 
 
-## (unreleased)
+## v1.1.0 (2021-11-27)
 
 ### Other
+
+* Release changelog v1.1.0. [Aleksandr Loktionov]
+
+* Merge pull request #11 from loktionovam/feature/changelog-autogeneration. [Aleksandr Loktionov]
+
+  Add changelog generation
 
 * Add changelog generation. [Aleksandr Loktionov]
 
