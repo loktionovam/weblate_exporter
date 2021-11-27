@@ -48,103 +48,140 @@ class TestWeblateCollector(TestCase):
         self.assertEqual(
             15,
             self.registry.get_sample_value(
-                "weblate_exporter_app_units", {"name": "Devel"}
+                "weblate_exporter_app_units",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/api/"},
             ),
         )
         self.assertEqual(
             8,
             self.registry.get_sample_value(
-                "weblate_exporter_app_units_translated", {"name": "Devel"}
+                "weblate_exporter_app_units_translated",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/api/"},
             ),
         )
         self.assertEqual(
             10,
             self.registry.get_sample_value(
-                "weblate_exporter_app_users", {"name": "Devel"}
+                "weblate_exporter_app_users",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/api/"},
             ),
         )
         self.assertEqual(
             30,
             self.registry.get_sample_value(
-                "weblate_exporter_app_changes", {"name": "Devel"}
+                "weblate_exporter_app_changes",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/api/"},
             ),
         )
         self.assertEqual(
             2,
             self.registry.get_sample_value(
-                "weblate_exporter_app_projects", {"name": "Devel"}
+                "weblate_exporter_app_projects",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/api/"},
             ),
         )
         self.assertEqual(
             5,
             self.registry.get_sample_value(
-                "weblate_exporter_app_components", {"name": "Devel"}
+                "weblate_exporter_app_components",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/api/"},
             ),
         )
         self.assertEqual(
             15,
             self.registry.get_sample_value(
-                "weblate_exporter_app_translations", {"name": "Devel"}
+                "weblate_exporter_app_translations",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/api/"},
             ),
         )
         self.assertEqual(
             20,
             self.registry.get_sample_value(
-                "weblate_exporter_app_languages", {"name": "Devel"}
+                "weblate_exporter_app_languages",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/api/"},
             ),
         )
         self.assertEqual(
             7,
             self.registry.get_sample_value(
-                "weblate_exporter_app_checks", {"name": "Devel"}
+                "weblate_exporter_app_checks",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/api/"},
             ),
         )
         self.assertEqual(
             6,
             self.registry.get_sample_value(
-                "weblate_exporter_app_configuration_errors", {"name": "Devel"}
+                "weblate_exporter_app_configuration_errors",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/api/"},
             ),
         )
         self.assertEqual(
             2,
             self.registry.get_sample_value(
-                "weblate_exporter_app_suggestions", {"name": "Devel"}
+                "weblate_exporter_app_suggestions",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/api/"},
             ),
         )
         self.assertEqual(
             15,
             self.registry.get_sample_value(
-                "weblate_exporter_app_celery_queues:memory", {"name": "Devel"}
+                "weblate_exporter_app_celery_queues",
+                {
+                    "name": "Devel",
+                    "weblate_api_url": "http://weblate:8080/api/",
+                    "weblate_celery_queue_name": "memory",
+                },
             ),
         )
         self.assertEqual(
             10,
             self.registry.get_sample_value(
-                "weblate_exporter_app_celery_queues:notify", {"name": "Devel"}
+                "weblate_exporter_app_celery_queues",
+                {
+                    "name": "Devel",
+                    "weblate_api_url": "http://weblate:8080/api/",
+                    "weblate_celery_queue_name": "notify",
+                },
             ),
         )
         self.assertEqual(
             7,
             self.registry.get_sample_value(
-                "weblate_exporter_app_celery_queues:celery", {"name": "Devel"}
+                "weblate_exporter_app_celery_queues",
+                {
+                    "name": "Devel",
+                    "weblate_api_url": "http://weblate:8080/api/",
+                    "weblate_celery_queue_name": "celery",
+                },
             ),
         )
         self.assertEqual(
             7,
             self.registry.get_sample_value(
-                "weblate_exporter_app_celery_queues:translate", {"name": "Devel"}
+                "weblate_exporter_app_celery_queues",
+                {
+                    "name": "Devel",
+                    "weblate_api_url": "http://weblate:8080/api/",
+                    "weblate_celery_queue_name": "translate",
+                },
             ),
         )
         self.assertEqual(
             1,
             self.registry.get_sample_value(
-                "weblate_exporter_app_celery_queues:backup", {"name": "Devel"}
+                "weblate_exporter_app_celery_queues",
+                {
+                    "name": "Devel",
+                    "weblate_api_url": "http://weblate:8080/api/",
+                    "weblate_celery_queue_name": "backup",
+                },
             ),
         )
         self.assertEqual(
             1,
             self.registry.get_sample_value(
-                "weblate_exporter_app_up", {"name": "Devel"}
+                "weblate_exporter_app_up",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/api/"},
             ),
         )
 
@@ -156,103 +193,143 @@ class TestWeblateCollector(TestCase):
         self.assertEqual(
             None,
             self.registry.get_sample_value(
-                "weblate_exporter_app_units", {"name": "Devel"}
+                "weblate_exporter_app_units",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/wrong_api/"},
             ),
         )
         self.assertEqual(
             None,
             self.registry.get_sample_value(
-                "weblate_exporter_app_units_translated", {"name": "Devel"}
+                "weblate_exporter_app_units_translated",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/wrong_api/"},
             ),
         )
         self.assertEqual(
             None,
             self.registry.get_sample_value(
-                "weblate_exporter_app_users", {"name": "Devel"}
+                "weblate_exporter_app_users",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/wrong_api/"},
             ),
         )
         self.assertEqual(
             None,
             self.registry.get_sample_value(
-                "weblate_exporter_app_changes", {"name": "Devel"}
+                "weblate_exporter_app_changes",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/wrong_api/"},
             ),
         )
         self.assertEqual(
             None,
             self.registry.get_sample_value(
-                "weblate_exporter_app_projects", {"name": "Devel"}
+                "weblate_exporter_app_projects",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/wrong_api/"},
             ),
         )
         self.assertEqual(
             None,
             self.registry.get_sample_value(
-                "weblate_exporter_app_components", {"name": "Devel"}
+                "weblate_exporter_app_components",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/wrong_api/"},
             ),
         )
         self.assertEqual(
             None,
             self.registry.get_sample_value(
-                "weblate_exporter_app_translations", {"name": "Devel"}
+                "weblate_exporter_app_translations",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/wrong_api/"},
             ),
         )
         self.assertEqual(
             None,
             self.registry.get_sample_value(
-                "weblate_exporter_app_languages", {"name": "Devel"}
+                "weblate_exporter_app_languages",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/wrong_api/"},
             ),
         )
         self.assertEqual(
             None,
             self.registry.get_sample_value(
-                "weblate_exporter_app_checks", {"name": "Devel"}
+                "weblate_exporter_app_checks",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/wrong_api/"},
             ),
         )
         self.assertEqual(
             None,
             self.registry.get_sample_value(
-                "weblate_exporter_app_configuration_errors", {"name": "Devel"}
+                "weblate_exporter_app_configuration_errors",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/wrong_api/"},
             ),
         )
         self.assertEqual(
             None,
             self.registry.get_sample_value(
-                "weblate_exporter_app_suggestions", {"name": "Devel"}
+                "weblate_exporter_app_suggestions",
+                {"name": "Devel", "weblate_api_url": "http://weblate:8080/wrong_api/"},
             ),
         )
         self.assertEqual(
             None,
             self.registry.get_sample_value(
-                "weblate_exporter_app_celery_queues:memory", {"name": "Devel"}
+                "weblate_exporter_app_celery_queues",
+                {
+                    "name": "Devel",
+                    "weblate_api_url": "http://weblate:8080/wrong_api/",
+                    "weblate_celery_queue_name": "memory",
+                },
             ),
         )
         self.assertEqual(
             None,
             self.registry.get_sample_value(
-                "weblate_exporter_app_celery_queues:notify", {"name": "Devel"}
+                "weblate_exporter_app_celery_queues",
+                {
+                    "name": "Devel",
+                    "weblate_api_url": "http://weblate:8080/wrong_api/",
+                    "weblate_celery_queue_name": "notify",
+                },
             ),
         )
         self.assertEqual(
             None,
             self.registry.get_sample_value(
-                "weblate_exporter_app_celery_queues:celery", {"name": "Devel"}
+                "weblate_exporter_app_celery_queues",
+                {
+                    "name": "Devel",
+                    "weblate_api_url": "http://weblate:8080/wrong_api/",
+                    "weblate_celery_queue_name": "celery",
+                },
             ),
         )
         self.assertEqual(
             None,
             self.registry.get_sample_value(
-                "weblate_exporter_app_celery_queues:translate", {"name": "Devel"}
+                "weblate_exporter_app_celery_queues",
+                {
+                    "name": "Devel",
+                    "weblate_api_url": "http://weblate:8080/wrong_api/",
+                    "weblate_celery_queue_name": "translate",
+                },
             ),
         )
         self.assertEqual(
             None,
             self.registry.get_sample_value(
-                "weblate_exporter_app_celery_queues:backup", {"name": "Devel"}
+                "weblate_exporter_app_celery_queues",
+                {
+                    "name": "Devel",
+                    "weblate_api_url": "http://weblate:8080/wrong_api/",
+                    "weblate_celery_queue_name": "backup",
+                },
             ),
         )
 
         self.assertEqual(
             0,
             self.registry.get_sample_value(
-                "weblate_exporter_app_up", {"name": "unknown"}
+                "weblate_exporter_app_up",
+                {
+                    "name": "unknown",
+                    "weblate_api_url": "http://weblate:8080/wrong_api/",
+                },
             ),
         )

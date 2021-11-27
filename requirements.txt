@@ -2,7 +2,6 @@ prometheus_client~=0.12.0
 configargparse~=1.5.3
 requests~=2.26.0
 wlc~=1.12
-flatdict~=4.0.1
 python-json-logger~=2.0.2
 ruamel.yaml~=0.17.17
 pre-commit~=2.15.0

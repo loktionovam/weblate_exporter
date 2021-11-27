@@ -34,12 +34,12 @@ def parse_args(args):
     )
     parser.add(
         "-p",
-        "--weblate_exporter_port",
-        metavar="weblate_exporter_port",
+        "--weblate_exporter_bind_port",
+        metavar="weblate_exporter_bind_port",
         required=False,
         type=int,
         help="Listen to this port",
-        default=int(os.environ.get("WEBLATE_EXPORTER_PORT", "9867")),
+        default=int(os.environ.get("WEBLATE_EXPORTER_BIND_PORT", "9867")),
     )
 
     return parser.parse_args(args)
@@ -53,8 +53,8 @@ def run_exporter(args):
     )
     REGISTRY.register(collector)
 
-    start_http_server(args.weblate_exporter_port)
-    log.info(f"Serving at port: {args.weblate_exporter_port}")
+    start_http_server(args.weblate_exporter_bind_port)
+    log.info(f"Serving at port: {args.weblate_exporter_bind_port}")
     while True:
         time.sleep(1)
 

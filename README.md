@@ -11,28 +11,21 @@ Supported versions:
 * Weblate >= 4.9
 
 Basic metrics
-| Metric                                      | Type  | Description                                                                                                      | Labels |
-|---------------------------------------------|-------|------------------------------------------------------------------------------------------------------------------|--------|
-| `weblate_exporter_app_up`                   | Gauge | Weblate application is running up                                                                                | `name` |
-| `weblate_exporter_app_units`                | Gauge | Total number of [units](https://docs.weblate.org/en/latest/api.html?highlight=units#units)                       | `name` |
-| `weblate_exporter_app_units_translated`     | Gauge | Number of translated [units](https://docs.weblate.org/en/latest/api.html?highlight=units#units)                  | `name` |
-| `weblate_exporter_app_users`                | Gauge | Number of weblate users                                                                                          | `name` |
-| `weblate_exporter_app_changes`              | Gauge | Number of [translation changes](https://docs.weblate.org/en/latest/api.html?highlight=changes#get--api-changes-) | `name` |
-| `weblate_exporter_app_projects`             | Gauge | Number of [projects](https://docs.weblate.org/en/latest/user/translating.html#translation-projects)              | `name` |
-| `weblate_exporter_app_components`           | Gauge | Number of [components](https://docs.weblate.org/en/latest/admin/projects.html#component)                         | `name` |
-| `weblate_exporter_app_translations`         | Gauge | Number of [translations](https://docs.weblate.org/en/latest/api.html?highlight=units#translations)               | `name` |
-| `weblate_exporter_app_languages`            | Gauge | Number of [used languages](https://docs.weblate.org/en/latest/api.html?highlight=units#languages)                | `name` |
-| `weblate_exporter_app_configuration_errors` | Gauge | Number of [configuration errors](https://docs.weblate.org/en/latest/api.html?highlight=units#metrics)            | `name` |
-| `weblate_exporter_app_suggestions`          | Gauge | Number of pending [suggestions](https://docs.weblate.org/en/latest/api.html?highlight=units#metrics)             | `name` |
+| Metric                                      | Type  | Description                                                                                                                         | Labels                                                 |
+|---------------------------------------------|-------|-------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
+| `weblate_exporter_app_up`                   | Gauge | Weblate application is running up                                                                                                   | `name`, `weblate_api_url`                              |
+| `weblate_exporter_app_units`                | Gauge | Total number of [units](https://docs.weblate.org/en/latest/api.html?highlight=units#units)                                          | `name`, `weblate_api_url`                              |
+| `weblate_exporter_app_units_translated`     | Gauge | Number of translated [units](https://docs.weblate.org/en/latest/api.html?highlight=units#units)                                     | `name`, `weblate_api_url`                              |
+| `weblate_exporter_app_users`                | Gauge | Number of weblate users                                                                                                             | `name`, `weblate_api_url`                              |
+| `weblate_exporter_app_changes`              | Gauge | Number of [translation changes](https://docs.weblate.org/en/latest/api.html?highlight=changes#get--api-changes-)                    | `name`, `weblate_api_url`                              |
+| `weblate_exporter_app_projects`             | Gauge | Number of [projects](https://docs.weblate.org/en/latest/user/translating.html#translation-projects)                                 | `name`, `weblate_api_url`                              |
+| `weblate_exporter_app_components`           | Gauge | Number of [components](https://docs.weblate.org/en/latest/admin/projects.html#component)                                            | `name`, `weblate_api_url`                              |
+| `weblate_exporter_app_translations`         | Gauge | Number of [translations](https://docs.weblate.org/en/latest/api.html?highlight=units#translations)                                  | `name`, `weblate_api_url`                              |
+| `weblate_exporter_app_languages`            | Gauge | Number of [used languages](https://docs.weblate.org/en/latest/api.html?highlight=units#languages)                                   | `name`, `weblate_api_url`                              |
+| `weblate_exporter_app_configuration_errors` | Gauge | Number of [configuration errors](https://docs.weblate.org/en/latest/api.html?highlight=units#metrics)                               | `name`, `weblate_api_url`                              |
+| `weblate_exporter_app_suggestions`          | Gauge | Number of pending [suggestions](https://docs.weblate.org/en/latest/api.html?highlight=units#metrics)                                | `name`, `weblate_api_url`                              |
+| `weblate_exporter_app_celery_queues`        | Gauge | Lengths of various celery queues, see [Background tasks using Celery](https://docs.weblate.org/en/latest/admin/install.html#celery) | `name`, `weblate_api_url`, `weblate_celery_queue_name` |
 
-Metrics below describes lengths of various celery queues, see [Background tasks using Celery](https://docs.weblate.org/en/latest/admin/install.html#celery)
-| Metric                                         | Type  | Labels |
-|------------------------------------------------|-------|--------|
-| `weblate_exporter_app_celery_queues:memory`    | Gauge | `name` |
-| `weblate_exporter_app_celery_queues:notify`    | Gauge | `name` |
-| `weblate_exporter_app_celery_queues:celery"`   | Gauge | `name` |
-| `weblate_exporter_app_celery_queues:translate` | Gauge | `name` |
-| `weblate_exporter_app_celery_queues:backup`    | Gauge | `name` |
 
 ## Building and running
 
@@ -132,7 +125,7 @@ Metrics below describes lengths of various celery queues, see [Background tasks 
     ---
     weblate_api_url: http://weblate.example.com/api/
     weblate_api_key: secret_api_key
-    weblate_exporter_port: 9867
+    weblate_exporter_bind_port: 9867
 
     # Run weblate_exporter docker container:
     docker run -p 9867:9867  -d -v $(pwd)/weblate_exporter.yaml:/etc/weblate_exporter.yaml  yourname/weblate_exporter:0.1.0
@@ -142,9 +135,24 @@ Metrics below describes lengths of various celery queues, see [Background tasks 
 
   ```
 
+### Grafana
+
+How to import [Weblate metrics dashboard](./grafana/dashboards/weblate.json) described [here](https://grafana.com/docs/grafana/latest/dashboards/export-import/#import-dashboard)
+
+![Grafana Dashboard (Summary)](grafana/img/dashboard-summary.png)
+![Grafana Dashboard (Graphs)](grafana/img/dashboard-graphs.png)
+
 ## Developing and testing weblate exporter
 
 * Install prerequisites [as described here](#setup-an-environment-for-developing-and-testing) and activate python virtual environment
+* Install pre-commit hooks
+
+  ```shell
+  source venv/bin/activate
+  pre-commit install
+  pre-commit install-hooks
+  ```
+
 * Format the code and run tests:
 
   ```shell

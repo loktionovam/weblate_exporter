@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "weblate-exporter.fullname" . }}-svc
+  name: {{ include "weblate-exporter.fullname" . }}
   labels:
     {{- include "weblate-exporter.labels" . | nindent 4 }}
 spec:

@@ -24,7 +24,7 @@ class TestCLI(TestCase):
     def test_parse_args_config(self):
         config_path = os.path.join(DATA_DIR, "config.yaml")
         args = parse_args(["--config", config_path])
-        assert args.weblate_exporter_port == 9867
+        assert args.weblate_exporter_bind_port == 9867
         assert args.weblate_api_url == "http://test-weblate:8080/api/"
         assert args.weblate_api_key == "test_weblate_api_key"
 
@@ -33,13 +33,13 @@ class TestCLI(TestCase):
         {
             "WEBLATE_API_URL": "http://env-test-weblate:8080/api/",
             "WEBLATE_API_KEY": "env_test_weblate_api_key",
-            "WEBLATE_EXPORTER_PORT": "9868",
+            "WEBLATE_EXPORTER_BIND_PORT": "9868",
         },
     )
     def test_parse_args_env(self):
         args = parse_args([])
 
-        assert args.weblate_exporter_port == 9868
+        assert args.weblate_exporter_bind_port == 9868
         assert args.weblate_api_url == "http://env-test-weblate:8080/api/"
         assert args.weblate_api_key == "env_test_weblate_api_key"
 
