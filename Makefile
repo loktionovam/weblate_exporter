@@ -24,6 +24,9 @@ build-charts:
 	helm lint helm/charts/weblate-exporter
 	helm/release_helm_chart.py
 
+changelog:
+	gitchangelog > CHANGELOG.md
+
 all: test-apps build-images test-images build-charts
 
 .PHONY: test-apps fmt lint build-images test-images push-images build-charts all
