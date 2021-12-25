@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   weblate-exporter:
   - apiVersion: v2
+    appVersion: v1.1.1
+    created: "2021-12-25T16:43:42.068632795Z"
+    description: Weblate prometheus metrics exporter
+    digest: 8bc8f2a1f3787a673e07836c0f4a672524671ea643db586d0809fc598540a094
+    name: weblate-exporter
+    type: application
+    urls:
+    - https://github.com/loktionovam/weblate_exporter/releases/download/weblate-exporter-1.1.1/weblate-exporter-1.1.1.tgz
+    version: 1.1.1
+  - apiVersion: v2
     appVersion: v1.1.0
     created: "2021-11-27T17:46:12.214366396Z"
     description: Weblate prometheus metrics exporter
@@ -51,4 +61,4 @@ entries:
     urls:
     - https://github.com/loktionovam/weblate_exporter/releases/download/weblate-exporter-0.3.2/weblate-exporter-0.3.2.tgz
     version: 0.3.2
-generated: "2021-11-27T17:46:12.214417696Z"
+generated: "2021-12-25T16:43:42.069209605Z"
