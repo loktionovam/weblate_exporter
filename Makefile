@@ -1,5 +1,6 @@
 WEBLATE_EXPORTER_IMAGE_NAME ?= loktionovam/weblate_exporter
 WEBLATE_EXPORTER_IMAGE_TAG ?= $(shell ./get_version.sh)
+GIT_BRANCH_NAME := $(shell git branch  --show-current)
 export
 
 lint:
@@ -25,7 +26,12 @@ build-charts:
 	helm/release_helm_chart.py
 
 changelog:
+ifeq ($(GIT_BRANCH_NAME), "main")
+	@echo "Current branch is $(GIT_BRANCH_NAME), create changelog"
 	gitchangelog > CHANGELOG.md
+else
+	@echo "Current branch is $(GIT_BRANCH_NAME), skipping to update CHANGELOG.md"
+endif
 
 all: test-apps build-images test-images build-charts
 

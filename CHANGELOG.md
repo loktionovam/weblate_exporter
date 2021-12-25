@@ -1,6 +1,13 @@
 # Changelog
 
 
+## (unreleased)
+
+### Other
+
+* Remove default empty dicts from WeblateMetrics constructor. [Aleksandr Loktionov]
+
+
 ## v1.1.0 (2021-11-27)
 
 ### Other
@@ -12,11 +19,6 @@
   Add changelog generation
 
 * Add changelog generation. [Aleksandr Loktionov]
-
-
-## v1.0.1 (2021-11-27)
-
-### Other
 
 * Merge pull request #10 from loktionovam/feature/grafana-dashboards. [Aleksandr Loktionov]
 
@@ -120,3 +122,5 @@
 ### Other
 
 * Initial commit. [Aleksandr Loktionov]
+
+
