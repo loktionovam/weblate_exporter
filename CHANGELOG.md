@@ -5,6 +5,19 @@
 
 ### Other
 
+* Release changelog v1.1.1. [Aleksandr Loktionov]
+
+
+## v1.1.1 (2021-12-25)
+
+### Other
+
+* Release changelog v1.1.1. [Aleksandr Loktionov]
+
+* Merge pull request #12 from loktionovam/bugfix/remove-dict-as-default-val. [Aleksandr Loktionov]
+
+  Remove default empty dicts from WeblateMetrics constructor
+
 * Remove default empty dicts from WeblateMetrics constructor. [Aleksandr Loktionov]
 
 
