@@ -4,6 +4,8 @@ FROM base as builder
 
 COPY . /setup
 RUN cd /setup \
+    && apk update \
+    && apk add gcc libc-dev \
     && python setup.py install \
     && find /usr/local/lib -name "*.pyc" -delete
 

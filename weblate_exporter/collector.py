@@ -24,7 +24,7 @@ class WeblateMetrics:
 
     """
 
-    def __init__(self, raw_metrics: dict = {}, additional_labels: dict = {}):
+    def __init__(self, raw_metrics: dict, additional_labels: dict):
         self.metrics_prefix = "weblate_exporter_app"
         labels_names = ["name"]
         labels_values = [raw_metrics["name"]]
