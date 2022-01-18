@@ -63,6 +63,10 @@ class WeblateMetrics:
                     )
                     self.data[metric_name].add_metric(labels_values, value)
 
+    def __iter__(self):
+        for metric in self.data.values():
+            yield metric
+
 
 class WeblateCollector:
     """
@@ -107,5 +111,5 @@ class WeblateCollector:
         self.metrics = WeblateMetrics(
             self._raw_metrics, additional_labels={"weblate_api_url": self.api_url}
         )
-        for metric in self.metrics.data.values():
+        for metric in self.metrics:
             yield metric
