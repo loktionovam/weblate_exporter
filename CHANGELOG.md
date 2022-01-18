@@ -1,6 +1,24 @@
 # Changelog
 
 
+## v1.1.2 (2022-01-18)
+
+### Other
+
+* Release v1.1.2. [Aleksandr Loktionov]
+
+* Merge pull request #13 from loktionovam/bugfix/iterator. [Aleksandr Loktionov]
+
+  Upgrade docker image due to vulnerable expat package
+
+* Upgrade docker image due to vulnerable expat package. [Aleksandr Loktionov]
+
+  * Upgrade expat package
+  * Add iterator to WeblateMetrics class
+
+* Release v1.1.1. [Aleksandr Loktionov]
+
+
 ## v1.1.1 (2021-12-25)
 
 ### Other
