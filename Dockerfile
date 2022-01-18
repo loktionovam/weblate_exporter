@@ -1,5 +1,9 @@
 FROM python:3-alpine AS base
 
+# Manual upgrade vulnerable packages
+# https://github.com/docker-library/python/issues/680
+RUN apk upgrade expat expat-dev
+
 FROM base as builder
 
 COPY . /setup
@@ -29,6 +33,6 @@ ENTRYPOINT [ "python", "-m", "weblate_exporter" ]
 FROM weblate_exporter AS vulnscan
 COPY --from=aquasec/trivy:latest /usr/local/bin/trivy /usr/local/bin/trivy
 USER root
-RUN trivy rootfs --exit-code 1 --no-progress /
+RUN trivy rootfs --exit-code 1 --no-progress --skip-files /usr/local/bin/trivy /
 
 FROM weblate_exporter as main
