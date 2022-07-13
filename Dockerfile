@@ -2,7 +2,7 @@ FROM python:3-alpine AS base
 
 # Manual upgrade vulnerable packages
 # https://github.com/docker-library/python/issues/680
-RUN apk upgrade expat expat-dev
+RUN apk upgrade expat expat-dev libcrypto1.1 libssl1.1
 
 FROM base as builder
 
