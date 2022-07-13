@@ -1,5 +1,5 @@
 -r requirements.txt
 -r requirements-test.txt
-black~=21.11b1
+black~=22.6.0
 gitchangelog~=3.0.4
 pystache~=0.5.4
