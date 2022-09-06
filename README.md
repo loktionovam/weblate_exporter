@@ -6,6 +6,17 @@
 
 Prometheus exporter for Weblate server metrics ([Weblate metrics described here](https://docs.weblate.org/en/latest/api.html))
 
+* [Weblate prometheus exporter](#weblate-prometheus-exporter)
+  * [Building and running](#building-and-running)
+    * [Prerequisites](#prerequisites)
+    * [Setup an environment for developing and testing](#setup-an-environment-for-developing-and-testing)
+    * [Build and test a docker image](#build-and-test-a-docker-image)
+    * [Run the weblate_exporter](#run-the-weblate_exporter)
+      * [Helm](#helm)
+      * [Docker](#docker)
+    * [Grafana](#grafana)
+  * [Developing and testing weblate exporter](#developing-and-testing-weblate-exporter)
+
 Supported versions:
 
 * Weblate >= 4.9
